@@ -14,8 +14,6 @@ class Cleaner:
 
 		# uppercase columns
 		self.blocks[["Block", "Day"]] = 	self.blocks[["Block", "Day"]].apply(lambda x: x.str.upper())
-
-		print(self.blocks)
 	
 	def cleanFile(self, file):
 		print("Cleaning:", file)
