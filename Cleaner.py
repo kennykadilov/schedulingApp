@@ -56,7 +56,7 @@ class Cleaner:
 		df[string_columns] = df[string_columns].apply(lambda x: x.str.strip())
 
 		# uppercase columns
-		upper_columns = ["Block", "Dep", "Section", "Day", "Bldg", "Loc"]
+		upper_columns = ["Block", "Dep", "Section", "Day", "Bldg", "Loc", "Rm"]
 		df[upper_columns] = df[upper_columns].apply(lambda x: x.str.upper())
 
 		# remove unused columns
@@ -72,7 +72,7 @@ class Cleaner:
 			(df["Loc"].str.upper() == "OFF CAMPUS") | (df["Loc"].str.upper() == "ONLINE")
 		
 		# erase Day, Start, End, Bldg, Rm, and Loc for these indices
-		df.loc[indices, ["Day", "Start", "End", "Bldg", "Rm", "Loc"]] = ""
+		df.loc[indices, ["Start", "End"]] = ""
 		
 		# set Block for these indices to "Z"
 		df.loc[indices, "Block"] = "Z"
