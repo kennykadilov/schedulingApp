@@ -25,14 +25,19 @@ if __name__ == "__main__":
 			# get cleaned dataframe
 			cleaned = cleaner.cleanFile(file)
 
-			# add df to combined df if not None
 			if cleaned is not None:
-				cleaned.to_excel("../cleaned data/" + file, index=False)
+				# add df to combined df
 				df = df.append(cleaned, ignore_index=True)
+
+				# export to cleaned data folder
+				cleaned.to_excel("../cleaned data/" + file, index=False)
+
+				print("Export:   Cleaned data exported to /cleaned data/" + file)
 			
 			print("----------------------")
 	
-	print(df)
-	
-	# export combined 
+	# export combined
 	df.to_excel("../Master.xlsx", index=False)
+
+	print("Export:   Cleaned data exported to /Master.xlsx")
+	print("----------------------")
