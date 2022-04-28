@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 
 from Cleaner import Cleaner
+from Exporter import Exporter
 
 # Change to data directory
 os.chdir("data")
@@ -10,6 +11,8 @@ os.chdir("data")
 if __name__ == "__main__":
 	print("----------------------")
 	cleaner = Cleaner()
+	print("----------------------")
+	exporter = Exporter()
 	print("----------------------")
 
 	df = pd.DataFrame()
@@ -29,15 +32,21 @@ if __name__ == "__main__":
 				# add df to combined df
 				df = df.append(cleaned, ignore_index=True)
 
-				# export to cleaned data folder
-				cleaned.to_excel("../cleaned data/" + file, index=False)
+				# export excel file to cleaned data folder
+				exporter.exportXLSX(cleaned, "../cleaned data/" + file)
 
 				print("Export:   Cleaned data exported to /cleaned data/" + file)
 			
 			print("----------------------")
 	
-	# export combined
-	df.to_excel("../Master.xlsx", index=False)
+	# export combined excel file
+	exporter.exportXLSX(df, "../Master.xlsx")
 
 	print("Export:   Cleaned data exported to /Master.xlsx")
+	print("----------------------")
+
+	# export sql file
+	exporter.exportSQL(df, "../db.sql")
+
+	print("Export:   Cleaned data exported to /db.sql")
 	print("----------------------")
